@@ -62,7 +62,7 @@ module TNCART_BOARD_REV1_TOP (
     input   wire    [7:0]   CART_MUX_SIG,
     output  wire    [2:0]   CART_MUX_CS_n,
     inout   wire    [7:0]   CART_DATA_SIG,
-    output  wire            CART_DATA_DIR,
+    output  wire            CART_DATA_DIR_n,
 
     // SOUND
     output  wire            SOUND_INT,
@@ -162,6 +162,11 @@ module TNCART_BOARD_REV1_TOP (
     /***************************************************************
      * MSX バス
      ***************************************************************/
+
+    // invert datadir for UA board version based on 1.02d
+    wire CART_DATA_DIR;
+    assign CART_DATA_DIR_n = ~CART_DATA_DIR;
+
     wire RESET_n;
     wire CLK = CLK_BASE;
     BUS_IF Bus();
